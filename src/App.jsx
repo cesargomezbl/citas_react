@@ -5,23 +5,24 @@ import ListadoPacientes from "./components/ListadoPacientes"
 
 function App() {
 
-  const [pacientes, setPacientes] = useState([]);
-  const [paciente, setPaciente] = useState({});
+  const [pacientes, setPacientes] = useState([])
+  const [paciente, setPaciente] = useState({})
 
+  // Se consulta en LocalStorage la lista de pacientes para establecerlo en en State
   useEffect(() => {
-    const obtenerLS = () => {
-      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
+    //const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? []
       setPacientes(pacientesLS)
-    }
-    obtenerLS();
-  }, []);
+    //}
+    //obtenerLS()
+  }, [])
 
   useEffect(() => {
-    localStorage.setItem('pacientes', JSON.stringify( pacientes ));
+    localStorage.setItem('pacientes', JSON.stringify(pacientes))
   }, [pacientes])
 
   const eliminarPaciente = id => {
-    const pacientesActualizados = pacientes.filter( paciente => paciente.id !== id);
+    const pacientesActualizados = pacientes.filter(paciente => paciente.id !== id)
     setPacientes(pacientesActualizados)
   }
 
@@ -30,17 +31,17 @@ function App() {
       <Header />
 
       <div className="mt-12 md:flex">
-          <Formulario 
-            pacientes={pacientes}
-            setPacientes={setPacientes}
-            paciente={paciente}
-            setPaciente={setPaciente}
-          />
-          <ListadoPacientes 
-            pacientes={pacientes}
-            setPaciente={setPaciente}
-            eliminarPaciente={eliminarPaciente}
-          />
+        <Formulario
+          pacientes={pacientes}
+          setPacientes={setPacientes}
+          paciente={paciente}
+          setPaciente={setPaciente}
+        />
+        <ListadoPacientes
+          pacientes={pacientes}
+          setPaciente={setPaciente}
+          eliminarPaciente={eliminarPaciente}
+        />
       </div>
 
     </div>
